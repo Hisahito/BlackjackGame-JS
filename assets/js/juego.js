@@ -19,6 +19,7 @@ const btnDetener = document.querySelector('#btnDetener');
 const btnNuevo = document.querySelector('#btnNuevo');
 
 const puntosHTML = document.querySelectorAll('small');
+const divCartasJugador = document.querySelector('#jugador-cartas');
 
 // Esta función crea una baraja de cartas
 const crearDeck = () => {
@@ -45,25 +46,38 @@ crearDeck();
 // Esta funcion me permite tomar una carta
 
 const pedirCarta = () => {
-    if( deck.length = 0){
+    if( deck.length === 0){
         throw new Error('No hay cartas en el deck');
     }
     const carta = deck.pop();
     return carta;
 }
 
-const valorCarta = (carta) => {
+const valorCarta = ( carta ) => {
     const valor = carta.substring(0, carta.length - 1);
     return ( isNaN( valor ) ) ?
-            ( valor === "A" ) ? 11 : 10
+            ( valor === 'A' ) ? 11 : 10
             : valor * 1;
 }
+
 
 
 // Eventos
 btnPedir.addEventListener('click', () => {
     const carta = pedirCarta();
-    puntosJugador += valorCarta(carta);
+    puntosJugador = puntosJugador + valorCarta(carta);
     puntosHTML[0].innerText = puntosJugador;
-    
+
+    const imgCarta = document.createElement('img');
+    imgCarta.src = `assets/cartas/${carta}.png`;
+    imgCarta.classList.add('carta');
+    divCartasJugador.append(imgCarta);
+
+    if ( puntosJugador > 21){
+        console.warn("Lo siento pero te pasate de 21. Perdiste!")
+        btnPedir.disabled = true
+    } else if(puntosJugador === 21) {
+        console.warn("Felicidades!! Ganaste!! ")
+        btnPedir.disabled = true;
+    }
 })
