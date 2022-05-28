@@ -9,6 +9,17 @@ let deck = [];
 const tipos = ['C', 'D', 'H', 'S'];
 const especiales = ['J', 'Q', 'K', 'A'];
 
+let puntosJugador = 0;
+let puntosComputadora = 0;
+
+// Referencias del HTML
+
+const btnPedir = document.querySelector('#btnPedir');
+const btnDetener = document.querySelector('#btnDetener');
+const btnNuevo = document.querySelector('#btnNuevo');
+
+const puntosHTML = document.querySelectorAll('small');
+
 // Esta función crea una baraja de cartas
 const crearDeck = () => {
 
@@ -47,3 +58,12 @@ const valorCarta = (carta) => {
             ( valor === "A" ) ? 11 : 10
             : valor * 1;
 }
+
+
+// Eventos
+btnPedir.addEventListener('click', () => {
+    const carta = pedirCarta();
+    puntosJugador += valorCarta(carta);
+    puntosHTML[0].innerText = puntosJugador;
+    
+})
