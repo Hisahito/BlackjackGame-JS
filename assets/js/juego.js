@@ -1,9 +1,7 @@
-/**
- * * 2C = TWO OF CLUBS
- * * 2D = TWO OF DIAMONDS
- * * 2H = TWO OF HEARTS
- * * 2S = TWO OF SPADES
- */
+
+
+(() => {
+    'use strict'
 
 // Variables globales iniciales
 let deck = [];
@@ -39,7 +37,6 @@ const crearDeck = () => {
     }
 
     deck = _.shuffle( deck );
-    console.log(deck);
     return deck;
 }
 
@@ -141,3 +138,6 @@ btnNuevo.addEventListener("click", () => {
     btnPedir.disabled = false;
     btnDetener.disabled = false;
 })
+
+})();
+
