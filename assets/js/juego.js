@@ -5,25 +5,35 @@
 
 // Variables globales iniciales
 let deck = [];
-const tipos = ['C', 'D', 'H', 'S'];
-const especiales = ['J', 'Q', 'K', 'A'];
+const tipos = ['C', 'D', 'H', 'S'],
+      especiales = ['J', 'Q', 'K', 'A'];
+let puntosJugadores = [];
 
-let puntosJugador = 0;
-let puntosComputadora = 0;
+//let puntosJugador = 0,
+//    puntosComputadora = 0;
 
 // Referencias del HTML
 
-const btnPedir = document.querySelector('#btnPedir');
-const btnDetener = document.querySelector('#btnDetener');
-const btnNuevo = document.querySelector('#btnNuevo');
+const btnPedir = document.querySelector('#btnPedir'),
+      btnDetener = document.querySelector('#btnDetener'),
+      btnNuevo = document.querySelector('#btnNuevo');
 
-const puntosHTML = document.querySelectorAll('small');
-const divCartasJugador = document.querySelector('#jugador-cartas');
-const divCartasComputadora = document.querySelector('#computadora-cartas');
+const puntosHTML = document.querySelectorAll('small'),
+      divCartasJugador = document.querySelector('#jugador-cartas'),
+      divCartasComputadora = document.querySelector('#computadora-cartas');
+
+// Esta funcion inicializa el juego
+const inicializarJuego = ( numJugadores = 2) => {
+       deck = crearDeck()
+       for(let i = 0; i < numJugadores; i++){
+           puntosJugadores.push(0)
+       }
+}
 
 // Esta función crea una baraja de cartas
 const crearDeck = () => {
 
+    deck = [];
     for (i = 2; i <= 10; i++) {
         for (let tipo of tipos) {
             deck.push(i + tipo);
@@ -36,20 +46,16 @@ const crearDeck = () => {
         }
     }
 
-    deck = _.shuffle( deck );
-    return deck;
+    return _.shuffle( deck );
 }
 
-crearDeck();
-
 // Esta funcion me permite tomar una carta
-
 const pedirCarta = () => {
+
     if( deck.length === 0){
         throw new Error('No hay cartas en el deck');
     }
-    const carta = deck.pop();
-    return carta;
+    return deck.pop();
 }
 
 const valorCarta = ( carta ) => {
@@ -59,6 +65,9 @@ const valorCarta = ( carta ) => {
             : valor * 1;
 }
 
+const acumularPuntos = () => {
+
+}
 // Turno de la computadora
 const turnoComputadora = (puntosMinimos) => {
     
